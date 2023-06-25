@@ -1,0 +1,58 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <title>Number_Management_Service</title> 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> 
+</head> 
+<body> 
+  <div class="container"> 
+    <h1>Number_Management_Service</h1> 
+    <button id="fetchNumbersBtn" class="btn btn-primary">Fetch_Numbers</button> 
+    <table id="numbersTable" class="table mt-3"> 
+      <thead> 
+        <tr> 
+          <th>URL</th> 
+          <th>Numbers</th> 
+        </tr> 
+      </thead> 
+      <tbody></tbody> 
+    </table> 
+  </div> 
+  <script> 
+    var jsonResponses = [ 
+      { 
+        url: "http://104.211.219.98/numbers/fibonacci", 
+        numbers: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34] 
+      },
+      { 
+        url: "http://104.211.219.98/numbers/even", 
+        numbers: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20] 
+      },
+      { 
+        url: "http://104.211.219.98/numbers/odd", 
+        numbers: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19] 
+      } 
+    ]; 
+  
+    document.getElementById('fetchNumbersBtn').addEventListener('click', function() { 
+      var numbersTableBody = document.getElementById('numbersTable').querySelector('tbody'); 
+      numbersTableBody.innerHTML = ''; 
+  
+      for (var i = 0; i < jsonResponses.length; i++) { 
+        var response = jsonResponses[i]; 
+        var url = response.url; 
+        var numbers = response.numbers; 
+  
+        var row = document.createElement('tr'); 
+        var urlCell = document.createElement('td'); 
+        var numbersCell = document.createElement('td'); 
+        urlCell.textContent = url; 
+        numbersCell.textContent = numbers.join(', '); 
+        row.appendChild(urlCell); 
+        row.appendChild(numbersCell); 
+        numbersTableBody.appendChild(row); 
+      } 
+    }); 
+  </script> 
+</body> 
+</html>
